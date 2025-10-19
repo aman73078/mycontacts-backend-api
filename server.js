@@ -8,12 +8,18 @@ const dotenv = require('dotenv').config();
 const app = express();
 
 // Local Modules
+const { connectDB } = require('./config/db');
 const contactRoutes = require('./routes/contactRoute');
 
 // Body Parser
 app.use(express.json());
+
+// Connect to Database
+connectDB();
 app.use("/api/contact",contactRoutes);
 app.use(errorHandler);
+
+
 
 const port = process.env.PORT || 5000;
 app.listen(port, () => {
